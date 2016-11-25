@@ -4,9 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class selection : MonoBehaviour {
 
-    float move = -40;
+    float move = -90;
 
     float flag = 0;
+    float flag1 = 0;
 
     // Use this for initialization
     void Start () {
@@ -15,23 +16,29 @@ public class selection : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.DownArrow) && flag < 2)
+        float Y = Input.GetAxis("Vertical");
+
+        if (Y <0 && flag < 3 && flag1 == 0)
         {
             transform.position = new Vector3(transform.position.x,
                                          transform.position.y + move, transform.position.z);
 
             flag += 1;
+
+            flag1 = 1;
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && flag > 0)
+        if (Y > 0 && flag > 0 && flag1 == 0)
         {
             transform.position = new Vector3(transform.position.x,
                                          transform.position.y - move, transform.position.z);
 
             flag -= 1;
+
+            flag1 = 1;
         }
 
-        if(Input.GetKeyDown(KeyCode.A))
+        if(Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("start_button"))
         {
             if(flag == 0)
             {
@@ -42,7 +49,10 @@ public class selection : MonoBehaviour {
                 SceneManager.LoadScene(1);
             }
         }
-
+        if(Y == 0)
+        {
+            flag1 = 0;
+        }
 
     }
     

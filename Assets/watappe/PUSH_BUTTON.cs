@@ -22,10 +22,12 @@ public class PUSH_BUTTON : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        switch(m_state)
+        
+
+        switch (m_state)
         {
             case TITELMENBER.title:
-                if (!Input.GetMouseButtonDown(0)) break; ;
+                if (!Input.GetKeyDown(KeyCode.Space) && !Input.GetButtonDown("start_button")) break;
                 m_tileMenber[(int)m_state].SetActive(false);
                 m_tileMenber[(int)TITELMENBER.menu].SetActive(true);
                 m_state = TITELMENBER.menu;
